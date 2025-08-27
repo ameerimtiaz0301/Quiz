@@ -21,6 +21,7 @@ body{
     background-size: cover;
     background-position: center;
     pointer-events: auto;
+    padding-top: 1px;
     transition: 2s ease;
 }
 .main.active{
@@ -517,4 +518,32 @@ body{
     text-align: center;
     font-size: 16px;
     color: #00ff90;
+}
+
+/* About Page */
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;   /* fills most of the page */
+    padding: 20px;
+}
+
+.about-content {
+    max-width: 1500px;
+    align-content: center;
+    text-align: center;  /* center align text */
+}
+
+.about-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #ffffff;
 }

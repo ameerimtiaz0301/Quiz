@@ -6,38 +6,67 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="main">
+  <main class="main">
+    <!-- Header section containing navbar and logo -->
     <header class="header">
-      <a href="index.html" class="logo">Quiz Game</a>
-      <nav class="navbar">
-        <a href="index.html">Home</a>
+      <a href="home.html" class="logo">Usman Arif Quiz site</a>
+
+      <nav class="navbar">  
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
         <a href="contact.html" class="active">Contact</a>
       </nav>
     </header>
 
+    <!-- Contact Content -->
     <div class="contact-container">
       <h2>Contact Us</h2>
-      <form id="contact-form">
+      
+      <!-- Updated Form -->
+      <form id="contact-form" action="https://formspree.io/f/xqadakdy" method="POST">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required>
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="_replyto" required>
 
         <label for="message">Message</label>
         <textarea id="message" name="message" rows="4" required></textarea>
 
+        <!-- Hidden input to detect bots -->
+        <input type="text" name="_gotcha" style="display:none">
+
         <button type="submit" class="contact-btn">Send Message</button>
       </form>
+
       <p id="status-msg"></p>
     </div>
-  </div>
+  </main>
 
   <script>
-    document.getElementById("contact-form").addEventListener("submit", function(e){
+    const form = document.getElementById("contact-form");
+    const statusMsg = document.getElementById("status-msg");
+
+    form.addEventListener("submit", async function(e) {
       e.preventDefault();
-      document.getElementById("status-msg").innerText = "✅ Thank you! Your message has been sent.";
-      this.reset();
+      const data = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          statusMsg.innerText = "✅ Thank you! Your message has been sent.";
+          form.reset();
+        } else {
+          statusMsg.innerText = "❌ Oops! Something went wrong. Please try again.";
+        }
+      } catch (error) {
+        statusMsg.innerText = "⚠️ Network error. Please try again later.";
+      }
     });
   </script>
 </body>
